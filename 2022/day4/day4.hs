@@ -9,7 +9,7 @@ fullyContains left right =
 
 overlaps :: [Int] -> [Int] -> Bool
 overlaps left right =
-    last left >= head right
+    last left >= head right && head left <= last right
 
 toInt :: String -> Int
 toInt = read
