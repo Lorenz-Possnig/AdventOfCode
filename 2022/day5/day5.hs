@@ -31,8 +31,8 @@ instruction1 = instruction reverse
 instruction2 :: Stacks -> String -> Stacks
 instruction2 = instruction id
 
-getResult :: (Stacks -> String -> Stacks) -> Stacks -> [String] -> IO()
-getResult f stacks instructions =
+getResult :: Stacks -> [String] -> (Stacks -> String -> Stacks) -> IO()
+getResult stacks instructions f =
   foldl f stacks instructions
     |> Map.elems
     |> map head
@@ -44,7 +44,7 @@ main = do
     let (readDiagram -> stacks, tail -> instructions) = x
             |> lines
             |> break null
-    let result f = getResult f stacks instructions
+    let result = getResult stacks instructions
     putStr "Part 1: "
     result instruction1
 
